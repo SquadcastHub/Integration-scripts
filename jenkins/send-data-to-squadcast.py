@@ -28,7 +28,10 @@ def form_payload(build_number, job_name, build_url, status):
 def post_to_url(url, payload):  
     """Posts the formed payload as json to the passed url"""
     try:
-        headers = {'content-type': 'application/json'}
+        headers={
+        'User-Agent': 'squadcast',
+        "Content-Type": "application/json"
+        }
         req = requests.post(url, data = bytes(json.dumps(payload).encode('utf-8')), headers = headers)
         if req.status_code > 299:
             print("Request failed with status code %s : %s" % (req.status_code, req.content))
